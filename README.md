@@ -1,1 +1,1 @@
-[Day Trader](./assets/promo/title_screen.gif)
+![Day Trader](./assets/promo/title_screen.gif)
