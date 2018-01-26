@@ -30,6 +30,6 @@ export default class BootState extends Phaser.State {
 
         // Debug
         // game.state.add('debug', new DebugState());
-        game.state.start('introStore');
+        // game.state.start('introStore');
     }
 }
