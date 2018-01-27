@@ -4,10 +4,12 @@ import introStoreCatalogue from '../data/catalogues/introCatalogue';
 import GameText from '../objects/GameText';
 import WalletService from '../services/WalletService';
 import PlayerService from '../services/PlayerService';
+import Balance from '../objects/Balance';
 
 export default class IntroStoreState extends Phaser.State {
     private catalogue: Catalogue;
     private wallet: WalletService;
+    private balance: Balance;
 
     constructor (
         private player: PlayerService
@@ -19,21 +21,17 @@ export default class IntroStoreState extends Phaser.State {
         game: Phaser.Game
     ) {
         this.catalogue = new Catalogue(game, this.player.getItemsById('INTRO'));
+        this.balance = new Balance(game);
+        this.balance.setText(this.player.printWalletBalance());
         this.catalogue.preload(game);
     }
 
     public create (
         game: Phaser.Game
     ) {
-        const balance = new GameText(game, 'foo');
-
-        balance.setText(this.player.printWalletBalance());
-        balance.x = 10;
-        balance.y = 10;
-
-        game.add.existing(balance);
-
         this.catalogue.create(game);
+
+        game.add.existing(this.balance);
         game.add.existing(this.catalogue);
 
         // Buy item
@@ -43,7 +41,7 @@ export default class IntroStoreState extends Phaser.State {
             switch (game.input.keyboard.event.keyCode) {
                 case Phaser.Keyboard.ENTER:
                     this.player.buyProduct(this.catalogue.getCatalogueId(), this.catalogue.getActiveItem());
-                    balance.setText(this.player.printWalletBalance());
+                    this.balance.setText(this.player.printWalletBalance());
                     break;
             }
         };
