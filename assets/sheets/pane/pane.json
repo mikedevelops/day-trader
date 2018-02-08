@@ -70,14 +70,22 @@
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
     "duration": 100
+   },
+   "pane 9.ase": {
+    "frame": { "x": 288, "y": 0, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 100
    }
  },
  "meta": {
   "app": "http://www.aseprite.org/",
   "version": "1.2.6",
-  "image": "/Users/mikes/Projects/Games/phaser-sandbox/assets/sheets/pane/pane.png",
+  "image": "/Users/mikes/Projects/Games/day-trader/assets/sheets/pane/pane.png",
   "format": "RGBA8888",
-  "size": { "w": 288, "h": 32 },
+  "size": { "w": 320, "h": 32 },
   "scale": "1",
   "frameTags": [
   ],
