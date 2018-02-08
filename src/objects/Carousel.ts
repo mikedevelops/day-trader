@@ -28,11 +28,7 @@ export default class Carousel extends Phaser.Sprite {
 
         // Create new catalogue service for managing items
         this.catalogue = new CatalogueService(items);
-    }
 
-    public create (
-        game: Phaser.Game
-    ) {
         // Create arrow sprites
         this.leftArrow = new Phaser.Sprite(game, 0, 0, 'catalogue', sprites.ARROW);
         this.rightArrow = new Phaser.Sprite(game, 0, 0, 'catalogue', sprites.ARROW);

@@ -12,43 +12,32 @@ export default class Catalogue extends Carousel {
         private userCatalogue: UserCatalogueInterface
     ) {
         super(game, userCatalogue);
-    }
 
-    public getCatalogueId (): string {
-        return this.userCatalogue.id;
-    }
+        // Create price text
+        this.price = new GameText(game, '', { align: 'center' });
 
-    public preload (
-        game: Phaser.Game
-    ) {
-        super.preload(game);
-
-        game.load.atlas('pane', 'pane.png', 'pane.json');
-    }
-
-    public create (
-        game: Phaser.Game
-    ) {
-        // price
-        this.price = new GameText(game, 'foo', { align: 'center' });
-
-        // description pane
+        // Create description pane and set position
         this.descriptionPane = new TextPane(game);
         this.descriptionPane.setPosition(game, 'BOTTOM');
 
+        // Add items
         this.addChild(this.price);
         this.addChild(this.descriptionPane);
 
-        super.create(game);
-
-        // price positioning
+        // Position price text
         this.price.y = this.background.height - (this.price.height / 2) + this.topPadding;
         this.price.x = this.background.width / 2;
         this.price.wordWrapWidth = 500;
         this.price.anchor.setTo(0.5);
     }
 
+    public getCatalogueId (): string {
+        // Return the current catatlogue ID
+        return this.userCatalogue.id;
+    }
+
     public update () {
+        // Update description text and price
         this.descriptionPane.updateText(this.catalogue.printActiveProduct());
         this.price.text = this.catalogue.printActiveProductPrice();
     }
