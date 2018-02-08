@@ -11,14 +11,26 @@ export default class Pane extends Phaser.Sprite {
         spriteRefs: any,
         res: number,
         width: number = 16,
-        height: number = 5
+        height: number = 5,
+        background: number = 0x000000
     ) {
         super(game, 0, 0, null);
 
+        // Set actual pane dimensions
         this.paneWidth = width * res;
         this.paneHeight = height * res;
         this.verticalHeight = this.paneHeight - (res * 2);
         this.horizontalWidth = this.paneWidth - (res * 2);
+
+        // Create pane background
+        const backgroundGraphics = new Phaser.Graphics(game);
+
+        backgroundGraphics.beginFill(background);
+        backgroundGraphics.drawRect(0, 0, this.paneWidth, this.paneHeight);
+
+        this.addChild(backgroundGraphics);
+
+        // Build pane
 
         if (this.horizontalWidth) {
             // top
