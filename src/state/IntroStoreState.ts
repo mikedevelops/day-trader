@@ -28,6 +28,10 @@ export default class IntroStoreState extends Phaser.State {
         super();
     }
 
+    /**
+     * Preload state objects
+     * @param game
+     */
     public preload (
         game: Phaser.Game
     ) {
@@ -37,21 +41,21 @@ export default class IntroStoreState extends Phaser.State {
         game.load.atlas('products', 'products@4x.png', 'products@4x.json');
     }
 
+    /**
+     * Create game state
+     * @param game
+     */
     public create (
         game: Phaser.Game
     ) {
         // Create new Catalogue instance using the INTRO catalogue
-        this.catalogue = new Catalogue(game, this.player.getItemsById('INTRO'));
+        this.catalogue = new Catalogue(game, this.player.getCatalogueById('INTRO'));
         // Create new SelectPane for buy / sell actions
         this.select = new SelectPane(game, [this.getSelectItem()]);
         // Create new Balance for diaplyaing player money
         this.balance = new Balance(game);
         // Update Balance to display player wallet balance
         this.balance.setText(this.player.printWalletBalance());
-
-        // Create catalogue object
-        // TODO: this could become part of the Catalogue costructor
-        this.catalogue.create(game);
 
         // Adjust catalogue arrows to account for buy UI
         this.catalogue.setArrowPositionY(1);
@@ -105,10 +109,9 @@ export default class IntroStoreState extends Phaser.State {
         };
     }
 
-    public update (
-        game: Phaser.Game
-    ) {}
-
+    /**
+     * Get SelectItem object
+     */
     private getSelectItem (): SelectItem {
         // Determine if the active item is owned by the user
         const owned: boolean = this.player.ownsItem(this.catalogue.getCatalogueId(), this.catalogue.getActiveItem());
