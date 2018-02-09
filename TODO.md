@@ -47,9 +47,14 @@ Todos
     - Buy method √
     - wallet UI √
 
-26/1/2018
+9/2/2018
 
 - Products
-    - Buy UI
-    - Think about the way product objects are passed around
-        the services
+    - Buy UI √
+
+10/2/2018
+
+- Intro Store State
+    - Modal component
+    - Congratulate player on first purchase
+    - Continue prompt to start first day
