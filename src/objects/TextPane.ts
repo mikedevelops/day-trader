@@ -3,6 +3,8 @@ import Pane from '../objects/Pane';
 import SpeechService from '../services/SpeechService';
 import GameText from '../objects/GameText';
 
+// FIXME: Need to expose this as part of the game object
+// so it is available to every service
 const DEFAULT_RES = 32;
 const sprites = {
     HORIZONTAL_BOTTOM: 'pane 0.ase',
@@ -29,18 +31,20 @@ export default class TextPane extends Phaser.Sprite {
         y: number = 0,
         width: number = (game.width / DEFAULT_RES),
         height: number = 5,
-        res: number = DEFAULT_RES
+        res: number = DEFAULT_RES,
+        background: number = 0x000000
     ) {
         super(game, x, y, null);
 
+        // Set pane dimensions and resolution
         this.paneWidth = width;
         this.paneHeight = height;
         this.res = res;
 
-        // Pane
-        this.pane = new Pane(game, sprites, this.res, this.paneWidth, this.paneHeight);
+        // Create new Pane instance
+        this.pane = new Pane(game, sprites, this.res, this.paneWidth, this.paneHeight, background);
 
-        // Text
+        // Create text and position
         this.gameText = new GameText(game, '', { fontSize: this.res / 2 });
         this.gameText.wordWrap = true;
         this.gameText.lineSpacing = 5;
@@ -49,7 +53,7 @@ export default class TextPane extends Phaser.Sprite {
         this.gameText.wordWrapWidth = (this.paneWidth * this.res) - (this.res * 1.5);
         this.gameText.text = text;
 
-        // Attach
+        // Attach objects
         this.addChild(this.pane);
         this.addChild(this.gameText);
     }
@@ -57,13 +61,15 @@ export default class TextPane extends Phaser.Sprite {
     public updateText (
         text: string
     ): void {
+        // Update text vaule
         this.gameText.text = text;
     }
 
     public setPosition (
         game: Phaser.Game,
-        position: 'TOP'|'BOTTOM'
+        position: 'TOP'|'BOTTOM'|'BOTTOM_RIGHT'|'TOP_RIGHT'
     ): void {
+        // Set TextPane position from a set of default values
         switch (position) {
             case 'TOP':
                 this.x = 0;
@@ -72,6 +78,14 @@ export default class TextPane extends Phaser.Sprite {
             case 'BOTTOM':
                 this.x = 0;
                 this.y = game.height - (this.paneHeight * this.res);
+                break;
+            case 'BOTTOM_RIGHT':
+                this.x = game.width - (this.paneWidth * this.res);
+                this.y = game.height - (this.paneHeight * this.res);
+                break;
+            case 'TOP_RIGHT':
+                this.x = game.width - (this.paneWidth * this.res);
+                this.y = 0;
                 break;
         }
     }
