@@ -2,6 +2,11 @@ import WalletService from './WalletService';
 import PlayerItemService from './PlayerItemService';
 import { CatalogueInterface, UserCatalogueInterface, UserProductInterface } from '../interfaces/catalogue';
 
+// TODO: Think about relationship with ItemService, seems odd we use the ItemService
+// to perform operations on a Catalogue even though we have access to catalogues through
+// the getCatalogueBId method. Also on this, should getCatalogueById be public? Do we want
+// to expose catalogues or not?
+
 export default class PlayerService {
     /**
      * Player Service
